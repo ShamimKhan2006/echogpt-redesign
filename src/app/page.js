@@ -10,6 +10,7 @@ import FAQ from '@/components/landing/FAQ';
 import TrustStrip from '@/components/landing/TrustStrip';
 import ExtensionSection from '@/components/landing/ExtensionSection';
 import Footer from '@/components/landing/Footer';
+import WhyChoose from '@/components/landing/WhyChoose';
 
 export default function Home() {
     const [darkMode, setDarkMode] = useState(true);
@@ -17,15 +18,16 @@ export default function Home() {
     return (
         <main className={`min-h-screen ${darkMode ? 'bg-[#0b0b10] text-white' : 'bg-white text-gray-900'}`}>
             {/* Navbar Pass props if needed, or handle inside */}
-            <Navber />
+            <Navber darkMode={darkMode} />
             <Hero darkMode={darkMode} />
             <Features darkMode={darkMode} /> 
-            <ExtensionSection/>
-            <Models/>
-            <ProductPreview/> 
-            <TrustStrip/> 
-            <FAQ/>
-            <Footer/>
+            <ExtensionSection darkMode={darkMode}/>
+            <Models darkMode={darkMode}/> 
+            <WhyChoose darkMode={darkMode}/>
+            <ProductPreview darkMode={darkMode}/> 
+            <TrustStrip darkMode={darkMode}/> 
+            <FAQ darkMode={darkMode}/>
+            <Footer darkMode={darkMode}/>
         </main>
     );
 }
