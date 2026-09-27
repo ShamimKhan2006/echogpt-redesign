@@ -1,5 +1,5 @@
 'use client';
-
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { 
   Sun, 
@@ -62,17 +62,17 @@ const Navber = () => {
                         </button>
 
                         {/* Sign In */}
-                        <a href="#signin" className={`text-sm font-medium px-3 py-2 rounded-lg transition-colors ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-black'}`}>
+                        <Link href="/signin" className={`text-sm font-medium px-3 py-2 rounded-lg transition-colors ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-black'}`}>
                             Sign In
-                        </a>
+                        </Link>
 
                         {/* Get Started CTA Button */}
-                        <a 
-                            href="#get-started" 
+                        <Link
+                            href="/signup" 
                             className="flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-sm font-medium px-4 py-2 rounded-xl shadow-lg shadow-purple-600/25 transition-all transform active:scale-95"
                         >
                             <span>Get Started</span>
-                        </a>
+                        </Link>
                     </div>
 
                     {/* Mobile Menu Button */}
