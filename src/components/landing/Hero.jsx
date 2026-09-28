@@ -1,5 +1,5 @@
 'use client';
-
+import Link from 'next/link';
 import React from 'react';
 import { Sparkles, ArrowRight, Play, CheckCircle2 } from 'lucide-react';
 
@@ -36,13 +36,15 @@ const Hero = ({ darkMode }) => {
 
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-                    <a 
-                        href="#get-started" 
+                    <Link
+                        href="/signin" 
                         className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium px-7 py-3.5 rounded-xl shadow-xl shadow-purple-600/25 transition-all transform active:scale-95"
                     >
+                   
                         <span>Start Chatting</span>
+                      
                         <ArrowRight className="w-4 h-4" />
-                    </a>
+                    </Link>
                     
                     <a 
                         href="#preview" 

@@ -1,10 +1,80 @@
+
 "use client";
 
+import Link from "next/link";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  const router = useRouter();
+
   const [darkMode, setDarkMode] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    setError("");
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    const { email, password } = formData;
+
+    // Validation
+    if (!email || !password) {
+      setError("Please enter your email and password.");
+      return;
+    }
+
+    // Get registered users
+    const users =
+      JSON.parse(localStorage.getItem("echogpt_users")) || [];
+
+    // Find user
+    const user = users.find(
+      (item) => item.email.toLowerCase() === email.toLowerCase()
+    );
+
+    // User doesn't exist
+    if (!user) {
+      setError("No account found with this email.");
+      return;
+    }
+
+    // Wrong password
+    if (user.password !== password) {
+      setError("Incorrect password. Please try again.");
+      return;
+    }
+
+    // Login successful
+    localStorage.setItem(
+      "echogpt_current_user",
+      JSON.stringify(user)
+    );
+
+    setSuccess("Login successful! Redirecting...");
+
+    // Demo dashboard route
+    setTimeout(() => {
+      router.push("/app");
+    }, 800);
+  };
 
   return (
     <main
@@ -38,7 +108,7 @@ const Page = () => {
         } backdrop-blur-xl`}
       >
         {/* Logo */}
-        <div className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 text-lg font-bold text-white shadow-lg shadow-purple-500/20">
             E
           </div>
@@ -46,10 +116,11 @@ const Page = () => {
           <span className="text-xl font-bold tracking-tight">
             Echo<span className="text-purple-500">GPT</span>
           </span>
-        </div>
+        </Link>
 
         {/* Theme Button */}
         <button
+          type="button"
           onClick={() => setDarkMode(!darkMode)}
           aria-label="Toggle theme"
           className={`flex h-10 w-10 items-center justify-center rounded-xl border transition-all ${
@@ -59,7 +130,6 @@ const Page = () => {
           }`}
         >
           {darkMode ? (
-            // Sun
             <svg
               width="19"
               height="19"
@@ -72,7 +142,6 @@ const Page = () => {
               <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
             </svg>
           ) : (
-            // Moon
             <svg
               width="19"
               height="19"
@@ -90,6 +159,7 @@ const Page = () => {
       {/* Main */}
       <section className="relative z-10 flex min-h-[calc(100vh-80px)] items-center justify-center px-5 py-12">
         <div className="w-full max-w-md">
+
           {/* Heading */}
           <div className="mb-8 text-center">
             <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-2xl font-bold text-white shadow-xl shadow-purple-500/20">
@@ -117,7 +187,7 @@ const Page = () => {
                 : "border-black/10 bg-white shadow-black/5"
             }`}
           >
-            {/* Google Button */}
+            {/* Google */}
             <button
               type="button"
               className={`flex h-12 w-full items-center justify-center gap-3 rounded-xl border text-sm font-medium transition-all ${
@@ -126,20 +196,22 @@ const Page = () => {
                   : "border-black/10 bg-white hover:bg-gray-50"
               }`}
             >
-              {/* Google Icon */}
               <svg width="18" height="18" viewBox="0 0 24 24">
                 <path
                   fill="#4285F4"
                   d="M21.35 12.27c0-.71-.06-1.39-.18-2.05H12v3.88h5.24a4.48 4.48 0 0 1-1.95 2.94v2.44h3.15c1.85-1.7 2.91-4.2 2.91-7.21Z"
                 />
+
                 <path
                   fill="#34A853"
                   d="M12 21.75c2.64 0 4.85-.87 6.47-2.37l-3.15-2.44c-.87.58-1.98.93-3.32.93-2.55 0-4.71-1.72-5.49-4.03H3.25v2.52A9.77 9.77 0 0 0 12 21.75Z"
                 />
+
                 <path
                   fill="#FBBC05"
                   d="M6.51 13.84A5.87 5.87 0 0 1 6.2 12c0-.64.11-1.27.31-1.84V7.64H3.25A9.76 9.76 0 0 0 2.22 12c0 1.57.38 3.05 1.03 4.36l3.26-2.52Z"
                 />
+
                 <path
                   fill="#EA4335"
                   d="M12 6.13c1.44 0 2.73.49 3.75 1.46l2.81-2.81C16.85 3.19 14.64 2.25 12 2.25a9.77 9.77 0 0 0-8.75 5.39l3.26 2.52c.78-2.31 2.94-4.03 5.49-4.03Z"
@@ -172,78 +244,102 @@ const Page = () => {
               />
             </div>
 
-            {/* Email */}
-            <div className="mb-5">
-              <label
-                htmlFor="email"
-                className="mb-2 block text-sm font-medium"
-              >
-                Email address
-              </label>
+            <form onSubmit={handleLogin}>
 
-              <input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                className={`h-12 w-full rounded-xl border px-4 text-sm outline-none transition-all focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 ${
-                  darkMode
-                    ? "border-white/10 bg-white/5 placeholder:text-gray-600"
-                    : "border-black/10 bg-gray-50 placeholder:text-gray-400"
-                }`}
-              />
-            </div>
-
-            {/* Password */}
-            <div className="mb-2">
-              <div className="mb-2 flex items-center justify-between">
+              {/* Email */}
+              <div className="mb-5">
                 <label
-                  htmlFor="password"
-                  className="text-sm font-medium"
+                  htmlFor="email"
+                  className="mb-2 block text-sm font-medium"
                 >
-                  Password
+                  Email address
                 </label>
 
-                <button
-                  type="button"
-                  className="text-xs font-medium text-purple-500 transition hover:text-purple-400"
-                >
-                  Forgot password?
-                </button>
-              </div>
-
-              <div className="relative">
                 <input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
-                  className={`h-12 w-full rounded-xl border px-4 pr-12 text-sm outline-none transition-all focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 ${
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="you@example.com"
+                  className={`h-12 w-full rounded-xl border px-4 text-sm outline-none transition-all focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 ${
                     darkMode
                       ? "border-white/10 bg-white/5 placeholder:text-gray-600"
                       : "border-black/10 bg-gray-50 placeholder:text-gray-400"
                   }`}
                 />
-
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className={`absolute right-3 top-1/2 -translate-y-1/2 p-1 ${
-                    darkMode
-                      ? "text-gray-500 hover:text-gray-300"
-                      : "text-gray-400 hover:text-gray-700"
-                  }`}
-                >
-                  {showPassword ? "◉" : "○"}
-                </button>
               </div>
-            </div>
 
-            {/* Sign In */}
-            <button
-              type="button"
-              className="mt-6 h-12 w-full rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-sm font-semibold text-white shadow-lg shadow-purple-500/20 transition-all hover:-translate-y-0.5 hover:shadow-purple-500/30 active:translate-y-0"
-            >
-              Sign In
-            </button>
+              {/* Password */}
+              <div className="mb-2">
+                <div className="mb-2 flex items-center justify-between">
+                  <label
+                    htmlFor="password"
+                    className="text-sm font-medium"
+                  >
+                    Password
+                  </label>
+
+                  <button
+                    type="button"
+                    onClick={() => setError("Forgot password is demo only.")}
+                    className="text-xs font-medium text-purple-500 transition hover:text-purple-400"
+                  >
+                    Forgot password?
+                  </button>
+                </div>
+
+                <div className="relative">
+                  <input
+                    id="password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Enter your password"
+                    className={`h-12 w-full rounded-xl border px-4 pr-12 text-sm outline-none transition-all focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 ${
+                      darkMode
+                        ? "border-white/10 bg-white/5 placeholder:text-gray-600"
+                        : "border-black/10 bg-gray-50 placeholder:text-gray-400"
+                    }`}
+                  />
+
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className={`absolute right-3 top-1/2 -translate-y-1/2 p-1 ${
+                      darkMode
+                        ? "text-gray-500 hover:text-gray-300"
+                        : "text-gray-400 hover:text-gray-700"
+                    }`}
+                  >
+                    {showPassword ? "◉" : "○"}
+                  </button>
+                </div>
+              </div>
+
+              {/* Error */}
+              {error && (
+                <div className="mt-4 rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+                  {error}
+                </div>
+              )}
+
+              {/* Success */}
+              {success && (
+                <div className="mt-4 rounded-xl border border-green-500/20 bg-green-500/10 px-4 py-3 text-sm text-green-400">
+                  {success}
+                </div>
+              )}
+
+              {/* Sign In */}
+              <button
+                type="submit"
+                className="mt-6 h-12 w-full rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-sm font-semibold text-white shadow-lg shadow-purple-500/20 transition-all hover:-translate-y-0.5 hover:shadow-purple-500/30 active:translate-y-0"
+              >
+                Sign In
+              </button>
+            </form>
 
             {/* Sign Up */}
             <p
@@ -252,12 +348,12 @@ const Page = () => {
               }`}
             >
               Don't have an account?{" "}
-              <button
-                type="button"
+              <Link
+                href="/signup"
                 className="font-semibold text-purple-500 hover:text-purple-400"
               >
                 Create account
-              </button>
+              </Link>
             </p>
           </div>
 
@@ -276,3 +372,4 @@ const Page = () => {
 };
 
 export default Page;
+

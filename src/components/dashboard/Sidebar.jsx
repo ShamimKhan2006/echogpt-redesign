@@ -1,3 +1,194 @@
+// "use client";
+
+// import Link from "next/link";
+// import { usePathname } from "next/navigation";
+
+// const menuItems = [
+//     {
+//         label: "Dashboard",
+//         href: "/app",
+//         icon: "⌂",
+//     },
+//     {
+//         label: "Job Analysis",
+//         href: "/job-analysis",
+//         icon: "⌕",
+//     },
+//     {
+//         label: "SOP Builder",
+//         href: "/sop-builder",
+//         icon: "✎",
+//     },
+//     {
+//         label: "Compare",
+//         href: "/compare",
+//         icon: "⇄",
+//     },
+//     {
+//         label: "History",
+//         href: "/history",
+//         icon: "◷",
+//     },
+//     {
+//         label: "Tasks",
+//         href: "/tasks",
+//         icon: "✓",
+//     },
+// ];
+
+// const toolItems = [
+//     {
+//         label: "Connectors",
+//         href: "/connectors",
+//         icon: "⌘",
+//     },
+//     {
+//         label: "Image Studio",
+//         href: "/image-studio",
+//         icon: "✦",
+//     },
+//     {
+//         label: "Extension",
+//         href: "/extension",
+//         icon: "▣",
+//     },
+// ];
+
+// export default function Sidebar() {
+//     const pathname = usePathname();
+
+//     const isActive = (href) => {
+//         return (
+//             pathname === href ||
+//             pathname.startsWith(`${href}/`)
+//         );
+//     };
+
+//     return (
+//         <aside className="sticky top-0 flex h-screen w-64 shrink-0 flex-col border-r border-gray-200 bg-white">
+
+//             {/* Logo */}
+//             <div className="flex h-16 items-center border-b border-gray-200 px-5">
+//                 <Link
+//                     href="/app"
+//                     className="flex items-center gap-3"
+//                 >
+//                     <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-black text-sm font-bold text-white">
+//                         N
+//                     </div>
+
+//                     <div>
+//                         <p className="text-sm font-bold text-gray-900">
+//                             EchoGPT
+//                         </p>
+
+//                         <p className="text-[11px] text-gray-400">
+//                             AI Career Assistant
+//                         </p>
+//                     </div>
+//                 </Link>
+//             </div>
+
+//             {/* Navigation */}
+//             <nav className="flex-1 overflow-y-auto px-3 py-5">
+
+//                 {/* Workspace */}
+//                 <p className="mb-3 px-3 text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+//                     Workspace
+//                 </p>
+
+//                 <div className="space-y-1">
+//                     {menuItems.map((item) => {
+//                         const active = isActive(item.href);
+
+//                         return (
+//                             <Link
+//                                 key={item.href}
+//                                 href={item.href}
+//                                 className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition ${
+//                                     active
+//                                         ? "bg-purple-50 text-purple-700"
+//                                         : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+//                                 }`}
+//                             >
+//                                 <span className="flex h-6 w-6 items-center justify-center text-base">
+//                                     {item.icon}
+//                                 </span>
+
+//                                 <span>
+//                                     {item.label}
+//                                 </span>
+//                             </Link>
+//                         );
+//                     })}
+//                 </div>
+
+//                 {/* Divider */}
+//                 <div className="my-5 border-t border-gray-100" />
+
+//                 {/* Tools */}
+//                 <p className="mb-3 px-3 text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+//                     Tools
+//                 </p>
+
+//                 <div className="space-y-1">
+//                     {toolItems.map((item) => {
+//                         const active = isActive(item.href);
+
+//                         return (
+//                             <Link
+//                                 key={item.href}
+//                                 href={item.href}
+//                                 className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition ${
+//                                     active
+//                                         ? "bg-purple-50 text-purple-700"
+//                                         : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+//                                 }`}
+//                             >
+//                                 <span className="flex h-6 w-6 items-center justify-center text-base">
+//                                     {item.icon}
+//                                 </span>
+
+//                                 <span>
+//                                     {item.label}
+//                                 </span>
+//                             </Link>
+//                         );
+//                     })}
+//                 </div>
+//             </nav>
+
+//             {/* User */}
+//             <div className="border-t border-gray-200 p-4">
+//                 <div className="flex items-center gap-3 rounded-xl bg-gray-50 p-3">
+
+//                     <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-purple-100 text-sm font-semibold text-purple-700">
+//                         S
+//                     </div>
+
+//                     <div className="min-w-0 flex-1">
+//                         <p className="truncate text-sm font-medium text-gray-900">
+//                             Shamim
+//                         </p>
+
+//                         <p className="truncate text-xs text-gray-400">
+//                             Free Plan
+//                         </p>
+//                     </div>
+
+//                     <button className="text-gray-400 hover:text-gray-600">
+//                         ⋮
+//                     </button>
+
+//                 </div>
+//             </div>
+//         </aside>
+//     );
+// } 
+
+
+
+
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
@@ -21,25 +212,93 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
 } from 'lucide-react';
-import HistoryList from './HistoryList';
+import { LayoutDashboard } from "lucide-react";
 
-/* ---------------------------------------------------------------
-   1. NAV CONFIG  (data, not JSX)
-   Notun item add korte hole shudhu ekhane ekta object add koro.
-   `pro: true` mane free user er jonno locked.
----------------------------------------------------------------- */
-const NAV_ITEMS = [
-  { id: 'image',     label: 'Image Studio',   href: '/image-studio', icon: ImageIcon,   color: 'text-purple-400',  pro: true },
-  { id: 'video',     label: 'Video Studio',   href: '/video-studio', icon: Video,       color: 'text-pink-400',    pro: true },
-  { id: 'compare',   label: 'Compare',        href: '/compare',      icon: GitCompare,  color: 'text-indigo-400' },
-  { id: 'connectors',label: 'Connectors',     href: '/connectors',   icon: Network,     color: 'text-blue-400' },
-  { id: 'history',   label: 'History',        href: '/history',      icon: History,     color: 'text-amber-400' },
-  { id: 'store',     label: 'Store',          href: '/store',        icon: Store,       color: 'text-emerald-400' },
-  { id: 'tasks',     label: 'AI Tasks',       href: '/tasks',        icon: CheckSquare, color: 'text-teal-400',    badgeKey: 'pendingTasks' },
-  { id: 'job',       label: 'AI Job Analysis',href: '/job-analysis', icon: FileSearch,  color: 'text-orange-400' },
-  { id: 'sop',       label: 'AI SOP Builder', href: '/sop-builder',  icon: FileText,    color: 'text-cyan-400' },
+ 
+   const NAV_ITEMS = [
+  {
+    id: "dashboard",
+    label: "Dashboard",
+    href: "/app",
+    icon: LayoutDashboard,
+    color: "text-violet-400",
+  },
+
+  {
+    id: "image",
+    label: "Image Studio",
+    href: "/image-studio",
+    icon: ImageIcon,
+    color: "text-purple-400",
+    pro: true,
+  },
+
+  {
+    id: "video",
+    label: "Video Studio",
+    href: "/video-studio",
+    icon: Video,
+    color: "text-pink-400",
+    pro: true,
+  },
+
+  {
+    id: "compare",
+    label: "Compare",
+    href: "/compare",
+    icon: GitCompare,
+    color: "text-indigo-400",
+  },
+
+  {
+    id: "connectors",
+    label: "Connectors",
+    href: "/connectors",
+    icon: Network,
+    color: "text-blue-400",
+  },
+
+  {
+    id: "history",
+    label: "History",
+    href: "/history",
+    icon: History,
+    color: "text-amber-400",
+  },
+
+  {
+    id: "store",
+    label: "Store",
+    href: "/store",
+    icon: Store,
+    color: "text-emerald-400",
+  },
+
+  {
+    id: "tasks",
+    label: "AI Tasks",
+    href: "/tasks",
+    icon: CheckSquare,
+    color: "text-teal-400",
+    badgeKey: "pendingTasks",
+  },
+
+  {
+    id: "job",
+    label: "AI Job Analysis",
+    href: "/job-analysis",
+    icon: FileSearch,
+    color: "text-orange-400",
+  },
+
+  {
+    id: "sop",
+    label: "AI SOP Builder",
+    href: "/sop-builder",
+    icon: FileText,
+    color: "text-cyan-400",
+  },
 ];
-
 /* ---------------------------------------------------------------
    2. Helpers
 ---------------------------------------------------------------- */
@@ -218,7 +477,7 @@ const Sidebar = ({
         {/* History list (collapsed thakle hide) */}
         {!collapsed && (
           <div className={`pt-2 border-t ${t.divider}`}>
-            <HistoryList darkMode={darkMode} />
+            {/* <HistoryList darkMode={darkMode} /> */}
           </div>
         )}
       </div>

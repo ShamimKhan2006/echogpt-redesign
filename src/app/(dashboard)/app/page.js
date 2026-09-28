@@ -9,21 +9,26 @@ import ModelSelector from "@/components/chat/ModelSelector";
 import QuickActions from "@/components/chat/QuickActions";
 import SettingsModal from "@/components/chat/SettingsModal";
 
+
+
+import { useState } from "react";
+
+// ...baki import
+
 export default function ChatPage() {
+  const [darkMode, setDarkMode] = useState(true);
+
   return (
     <div className="flex h-screen">
-      <Sidebar />
-
+   
       <main className="flex flex-1 flex-col">
         <ChatHeader />
-
-        <ChatWindow />
-
-
+        <ChatWindow /> 
         <HistoryList/> 
         <ModelSelector/> 
-        <QuickActions/> 
-        <SettingsModal/>
+        {/* <QuickActions/> 
+        <SettingsModal/> */}
+        {/* HistoryList, ModelSelector, QuickActions, SettingsModal */}
       </main>
     </div>
   );

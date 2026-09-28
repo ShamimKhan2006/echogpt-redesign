@@ -8,9 +8,10 @@ import Models from '@/components/landing/Models';
 import ProductPreview from '@/components/landing/ProductPreview';
 import FAQ from '@/components/landing/FAQ';
 import TrustStrip from '@/components/landing/TrustStrip';
-import ExtensionSection from '@/components/landing/ExtensionSection';
+
 import Footer from '@/components/landing/Footer';
 import WhyChoose from '@/components/landing/WhyChoose';
+import ExtensionSection from '@/components/landing/ExtensionSection';
 
 export default function Home() {
     const [darkMode, setDarkMode] = useState(true);
