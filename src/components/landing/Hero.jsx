@@ -16,7 +16,7 @@ const Hero = ({ darkMode }) => {
                 {/* Top Badge */}
                 <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-semibold mb-6 shadow-sm">
                     <Sparkles className="w-4 h-4" />
-                    <span>AI Remastered - Version 2.0</span>
+                    <span>AI Remastered -- Version 2.0</span>
                 </div>
 
                 {/* Main Heading */}
