@@ -10,13 +10,8 @@ import {
   ChevronDown 
 } from 'lucide-react';
 
-const Navber = () => {
-    const [darkMode, setDarkMode] = useState(true); // Default dark mode as per EchoGPT screenshot
+const Navber = ({ darkMode = true, toggleTheme }) => {
     const [isOpen, setIsOpen] = useState(false);
-
-    const toggleTheme = () => {
-        setDarkMode(!darkMode);
-    };
 
     return (
         <nav className={`w-full border-b transition-colors duration-300 sticky top-0 z-50 ${
@@ -103,12 +98,22 @@ const Navber = () => {
                     <a href="#faq" className={`block px-3 py-2 rounded-md text-base font-medium ${darkMode ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-700 hover:bg-gray-100'}`}>FAQ</a>
                     
                     <div className="pt-2 flex flex-col space-y-2">
-                        <a href="#signin" className={`w-full text-center py-2 rounded-lg font-medium border ${darkMode ? 'border-gray-700 text-white' : 'border-gray-300 text-gray-800'}`}>
+                        <Link 
+                            href="/signin" 
+                            className={`w-full text-center py-2.5 rounded-xl font-medium border text-sm transition-colors ${
+                                darkMode 
+                                    ? 'border-gray-700 text-white hover:bg-gray-800' 
+                                    : 'border-gray-300 text-gray-800 hover:bg-gray-100'
+                            }`}
+                        >
                             Sign In
-                        </a>
-                        <a href="#get-started" className="w-full text-center py-2 rounded-lg font-medium bg-purple-600 text-white shadow-md shadow-purple-600/30">
+                        </Link>
+                        <Link 
+                            href="/signup" 
+                            className="w-full text-center py-2.5 rounded-xl font-medium text-sm bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-600/30 hover:opacity-95 transition-opacity"
+                        >
                             Get Started
-                        </a>
+                        </Link>
                     </div>
                 </div>
             )}

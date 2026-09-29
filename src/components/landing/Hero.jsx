@@ -64,22 +64,28 @@ const Hero = ({ darkMode }) => {
                     darkMode ? 'border-gray-800 bg-[#12121a]' : 'border-gray-200 bg-white shadow-purple-500/5'
                 }`}>
                     <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/5 to-transparent pointer-events-none" />
-                    <div className="rounded-xl overflow-hidden border border-gray-800/50 bg-[#0b0b10] text-left p-6 sm:p-8">
-                        <div className="flex items-center justify-between pb-6 border-b border-gray-800">
+                    <div className={`rounded-xl overflow-hidden border text-left p-6 sm:p-8 transition-colors ${
+                        darkMode ? 'border-gray-800/50 bg-[#0b0b10]' : 'border-gray-200 bg-gray-50/80'
+                    }`}>
+                        <div className={`flex items-center justify-between pb-6 border-b ${
+                            darkMode ? 'border-gray-800' : 'border-gray-200'
+                        }`}>
                             <div className="flex items-center space-x-3">
                                 <div className="w-3 h-3 rounded-full bg-red-500/80" />
                                 <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                                 <div className="w-3 h-3 rounded-full bg-green-500/80" />
                             </div>
-                            <span className="text-xs font-mono text-gray-500">echogpt.workspace.app</span>
+                            <span className={`text-xs font-mono ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>echogpt.workspace.app</span>
                         </div>
                         
                         <div className="py-12 text-center">
-                            <div className="w-12 h-12 mx-auto mb-4 rounded-2xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-xl">
+                            <div className={`w-12 h-12 mx-auto mb-4 rounded-2xl border flex items-center justify-center font-bold text-xl ${
+                                darkMode ? 'bg-purple-600/20 border-purple-500/30 text-purple-400' : 'bg-purple-100 border-purple-200 text-purple-600'
+                            }`}>
                                 E
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-2">EchoGPT Interface Ready</h3>
-                            <p className="text-sm text-gray-400 max-w-md mx-auto">
+                            <h3 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>EchoGPT Interface Ready</h3>
+                            <p className={`text-sm max-w-md mx-auto ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                                 Type a question, switch models instantly, or compare multi-model outputs side-by-side with ultimate precision.
                             </p>
                         </div>

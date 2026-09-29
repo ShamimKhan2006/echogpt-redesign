@@ -51,19 +51,23 @@ const ProductPreview = ({ darkMode }) => {
                             <div className={`rounded-xl p-5 border ${
                                 darkMode ? 'bg-[#0b0b10] border-gray-800' : 'bg-white border-gray-200 shadow-sm'
                             }`}>
-                                <div className="flex items-center justify-between pb-4 mb-4 border-b border-gray-800/40">
+                                <div className={`flex items-center justify-between pb-4 mb-4 border-b ${
+                                    darkMode ? 'border-gray-800/40' : 'border-gray-200'
+                                }`}>
                                     <div className="flex items-center space-x-2">
                                         <div className="w-3 h-3 rounded-full bg-red-500" />
                                         <div className="w-3 h-3 rounded-full bg-yellow-500" />
                                         <div className="w-3 h-3 rounded-full bg-green-500" />
                                     </div>
-                                    <span className="text-[11px] font-mono text-purple-400">EchoGPT Pro Studio</span>
+                                    <span className={`text-[11px] font-mono ${darkMode ? 'text-purple-400' : 'text-purple-600'}`}>EchoGPT Pro Studio</span>
                                 </div>
                                 <div className="space-y-3">
                                     <div className="h-4 bg-purple-600/20 rounded w-3/4 animate-pulse" />
-                                    <div className="h-3 bg-gray-700/30 rounded w-full" />
-                                    <div className="h-3 bg-gray-700/30 rounded w-5/6" />
-                                    <div className="p-3 rounded-lg bg-purple-900/10 border border-purple-500/20 text-xs text-purple-300 mt-4">
+                                    <div className={`h-3 rounded w-full ${darkMode ? 'bg-gray-700/30' : 'bg-gray-200'}`} />
+                                    <div className={`h-3 rounded w-5/6 ${darkMode ? 'bg-gray-700/30' : 'bg-gray-200'}`} />
+                                    <div className={`p-3 rounded-lg border text-xs mt-4 ${
+                                        darkMode ? 'bg-purple-900/10 border-purple-500/20 text-purple-300' : 'bg-purple-50 border-purple-200 text-purple-800'
+                                    }`}>
                                         ✨ "Summarized web page contents successfully in 0.4s."
                                     </div>
                                 </div>

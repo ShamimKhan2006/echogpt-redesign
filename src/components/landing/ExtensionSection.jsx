@@ -76,42 +76,46 @@ const ExtensionSection = ({ darkMode }) => {
                         <div className={`p-6 rounded-3xl border shadow-2xl relative ${
                             darkMode ? 'bg-[#12121a] border-gray-800' : 'bg-white border-gray-200 shadow-purple-500/5'
                         }`}>
-                            <div className="flex items-center justify-between pb-4 mb-6 border-b border-gray-800/40">
+                            <div className={`flex items-center justify-between pb-4 mb-6 border-b ${
+                                darkMode ? 'border-gray-800/60' : 'border-gray-200'
+                            }`}>
                                 <div className="flex items-center space-x-2">
                                     <div className="w-3 h-3 rounded-full bg-red-500" />
                                     <div className="w-3 h-3 rounded-full bg-yellow-500" />
                                     <div className="w-3 h-3 rounded-full bg-green-500" />
                                 </div>
-                                <span className="text-xs font-mono text-purple-400">EchoGPT Extension Popup</span>
+                                <span className={`text-xs font-mono ${darkMode ? 'text-purple-400' : 'text-purple-600'}`}>EchoGPT Extension Popup</span>
                             </div>
 
                             {/* Simulated Extension Content Box */}
                             <div className={`p-4 rounded-xl border mb-4 space-y-3 ${
-                                darkMode ? 'bg-[#0b0b10] border-gray-800' : 'bg-gray-50 border-gray-200'
+                                darkMode ? 'bg-[#0b0b10] border-gray-800' : 'bg-purple-50/50 border-purple-100'
                             }`}>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-xs font-semibold text-purple-400 uppercase tracking-wider">Quick Action</span>
-                                    <span className="text-[10px] px-2 py-0.5 rounded bg-purple-500/20 text-purple-300">Active Tab</span>
+                                    <span className={`text-xs font-semibold uppercase tracking-wider ${darkMode ? 'text-purple-400' : 'text-purple-700'}`}>Quick Action</span>
+                                    <span className={`text-[10px] px-2 py-0.5 rounded font-medium ${darkMode ? 'bg-purple-500/20 text-purple-300' : 'bg-purple-100 text-purple-700'}`}>Active Tab</span>
                                 </div>
-                                <div className="p-3 rounded-lg bg-purple-600/10 border border-purple-500/20 text-xs text-purple-300 font-medium">
+                                <div className={`p-3 rounded-lg border text-xs font-medium ${
+                                    darkMode ? 'bg-purple-600/10 border-purple-500/20 text-purple-300' : 'bg-white border-purple-200/80 text-purple-900 shadow-sm'
+                                }`}>
                                     ✨ "Summarize this page" or "Explain selected text".
                                 </div>
                                 <div className="space-y-2 pt-1">
-                                    <div className="h-3 bg-gray-700/30 rounded w-full animate-pulse" />
-                                    <div className="h-3 bg-gray-700/30 rounded w-4/5 animate-pulse" />
+                                    <div className={`h-3 rounded w-full animate-pulse ${darkMode ? 'bg-gray-700/30' : 'bg-gray-200'}`} />
+                                    <div className={`h-3 rounded w-4/5 animate-pulse ${darkMode ? 'bg-gray-700/30' : 'bg-gray-200'}`} />
                                 </div>
                             </div>
 
                             {/* Mini Feature Badges */}
                             <div className="grid grid-cols-2 gap-3">
                                 <div className={`p-3 rounded-xl border text-center ${
-                                    darkMode ? 'bg-gray-900/60 border-gray-800 text-gray-300' : 'bg-white border-gray-100 text-gray-700 shadow-sm'
+                                    darkMode ? 'bg-gray-900/60 border-gray-800 text-gray-300' : 'bg-white border-gray-200 text-gray-700 shadow-sm'
                                 }`}>
                                     <Zap className="w-4 h-4 text-amber-400 mx-auto mb-1" />
                                     <span className="text-xs font-medium">Instant Popups</span>
                                 </div>
                                 <div className={`p-3 rounded-xl border text-center ${
-                                    darkMode ? 'bg-gray-900/60 border-gray-800 text-gray-300' : 'bg-white border-gray-100 text-gray-700 shadow-sm'
+                                    darkMode ? 'bg-gray-900/60 border-gray-800 text-gray-300' : 'bg-white border-gray-200 text-gray-700 shadow-sm'
                                 }`}>
                                     <Shield className="w-4 h-4 text-emerald-400 mx-auto mb-1" />
                                     <span className="text-xs font-medium">Secure & Private</span>

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { ArrowRight, Sparkles, Download } from 'lucide-react';
 
 const CTA = ({ darkMode }) => {
@@ -12,12 +13,14 @@ const CTA = ({ darkMode }) => {
                 <div className={`relative overflow-hidden rounded-3xl p-8 sm:p-14 border text-center shadow-2xl ${
                     darkMode 
                         ? 'bg-gradient-to-b from-[#12121a] to-[#07070a] border-purple-500/20' 
-                        : 'bg-gradient-to-b from-purple-50/50 to-indigo-50/30 border-purple-200'
+                        : 'bg-gradient-to-b from-purple-50/50 to-indigo-50/30 border-purple-200 shadow-purple-500/5'
                 }`}>
                     {/* Glow background */}
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-purple-600/20 blur-[100px] rounded-full pointer-events-none" />
 
-                    <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-semibold mb-6">
+                    <div className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-xs font-semibold mb-6 ${
+                        darkMode ? 'text-purple-400' : 'text-purple-700'
+                    }`}>
                         <Sparkles className="w-3.5 h-3.5" />
                         <span>Ready to transform your workflow?</span>
                     </div>
@@ -36,13 +39,13 @@ const CTA = ({ darkMode }) => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <a 
-                            href="#" 
+                        <Link 
+                            href="/signup" 
                             className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium px-8 py-3.5 rounded-xl shadow-lg shadow-purple-600/30 transition-all transform active:scale-95"
                         >
                             <span>Get Started Free</span>
                             <ArrowRight className="w-4 h-4" />
-                        </a>
+                        </Link>
                         <a 
                             href="#" 
                             className={`w-full sm:w-auto flex items-center justify-center space-x-2 px-8 py-3.5 rounded-xl border font-medium transition-all ${
