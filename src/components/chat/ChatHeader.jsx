@@ -1,98 +1,116 @@
 'use client';
 
-import React from 'react';
-import { 
-  Sparkles, 
-  ChevronDown, 
-  Share2, 
-  Settings, 
-  Sun, 
-  Moon, 
-  Cpu, 
-  Globe 
-} from 'lucide-react';
+import React, { useState } from 'react';
+import { Sparkles, ChevronDown, Share2, Settings, Sun, Moon } from 'lucide-react';
+import ModelSelector from './ModelSelector';
 
-const ChatHeader = ({ darkMode, toggleTheme, currentModel = "GPT-4o", onSelectModel }) => {
-    return (
-        <header className={`w-full px-4 sm:px-6 py-3.5 border-b flex items-center justify-between sticky top-0 z-40 transition-colors duration-300 ${
-            darkMode 
-                ? 'bg-[#0b0b10]/90 backdrop-blur-md border-gray-800 text-white' 
-                : 'bg-white/90 backdrop-blur-md border-gray-200 text-gray-900'
-        }`}>
-            
-            {/* Left: Model Selector Dropdown & Status */}
-            <div className="flex items-center space-x-3">
-                <div className="relative group">
-                    <button className={`flex items-center space-x-2.5 px-3.5 py-2 rounded-xl border text-sm font-medium transition-all ${
-                        darkMode 
-                            ? 'bg-gray-900/80 border-gray-800 text-gray-200 hover:border-purple-500/50' 
-                            : 'bg-gray-50 border-gray-200 text-gray-800 hover:border-purple-400 shadow-sm'
-                    }`}>
-                        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                        <span className="font-semibold">{currentModel}</span>
-                        <ChevronDown className="w-4 h-4 text-gray-400" />
-                    </button>
-                </div>
+const ChatHeader = ({
+  darkMode = false,
+  toggleTheme,
+  currentModel = 'GPT-4o',
+  onSelectModel,
+  onOpenSettings,
+}) => {
+  const [open, setOpen] = useState(false);
 
-                {/* Workspace mode tag */}
-                <div className={`hidden sm:flex items-center space-x-1.5 px-2.5 py-1 rounded-lg text-xs font-medium ${
-                    darkMode ? 'bg-purple-950/40 text-purple-300 border border-purple-800/40' : 'bg-purple-50 text-purple-600'
-                }`}>
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span>Multi-Model Active</span>
-                </div>
-            </div>
+  const iconBtn = `flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-200 active:scale-95 ${
+    darkMode
+      ? 'border-white/10 bg-white/[0.04] text-zinc-300 hover:bg-white/[0.08] hover:text-white'
+      : 'border-zinc-200 bg-white text-zinc-600 shadow-sm hover:bg-zinc-50 hover:text-zinc-900'
+  }`;
 
-            {/* Right: Actions, Theme Switch & User Profile */}
-            <div className="flex items-center space-x-2 sm:space-x-3">
-                
-                {/* Share / Export Button */}
-                <button 
-                    title="Share Chat"
-                    className={`p-2.5 rounded-xl border transition-colors ${
-                        darkMode 
-                            ? 'bg-gray-900/50 border-gray-800 text-gray-300 hover:bg-gray-800' 
-                            : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50 shadow-sm'
-                    }`}
-                >
-                    <Share2 className="w-4 h-4" />
-                </button>
+  return (
+    <header
+      className={`sticky top-0 z-40 flex w-full items-center justify-between border-b px-4 py-3 backdrop-blur-xl transition-colors duration-300 sm:px-6 ${
+        darkMode
+          ? 'border-white/[0.08] bg-[#08090d]/80 text-white'
+          : 'border-zinc-200/80 bg-white/80 text-zinc-900'
+      }`}
+    >
+      {/* Left */}
+      <div className="flex items-center gap-3">
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            className={`flex h-10 items-center gap-2.5 rounded-xl border px-3.5 text-sm font-semibold transition-all duration-200 ${
+              darkMode
+                ? 'border-white/10 bg-white/[0.04] text-zinc-100 hover:border-violet-500/50'
+                : 'border-zinc-200 bg-white text-zinc-800 shadow-sm hover:border-violet-300'
+            }`}
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            </span>
+            {currentModel}
+            <ChevronDown
+              size={16}
+              className={`text-zinc-400 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+            />
+          </button>
 
-                {/* Theme Toggle Button */}
-                <button 
-                    onClick={toggleTheme}
-                    title="Toggle Theme"
-                    className={`p-2.5 rounded-xl border transition-colors ${
-                        darkMode 
-                            ? 'bg-gray-900/50 border-gray-800 text-yellow-400 hover:bg-gray-800' 
-                            : 'bg-white border-gray-200 text-purple-600 hover:bg-gray-50 shadow-sm'
-                    }`}
-                >
-                    {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-                </button>
+          {open && (
+            <>
+              <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
+              <div className="absolute left-0 top-full z-50 mt-2">
+                <ModelSelector
+                  darkMode={darkMode}
+                  selectedModel={currentModel}
+                  onSelect={(name) => {
+                    onSelectModel && onSelectModel(name);
+                    setOpen(false);
+                  }}
+                />
+              </div>
+            </>
+          )}
+        </div>
 
-                {/* Settings */}
-                <button 
-                    title="Settings"
-                    className={`p-2.5 rounded-xl border transition-colors ${
-                        darkMode 
-                            ? 'bg-gray-900/50 border-gray-800 text-gray-300 hover:bg-gray-800' 
-                            : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50 shadow-sm'
-                    }`}
-                >
-                    <Settings className="w-4 h-4" />
-                </button>
+        <div
+          className={`hidden items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium sm:flex ${
+            darkMode
+              ? 'border-violet-500/20 bg-violet-500/10 text-violet-300'
+              : 'border-violet-200 bg-violet-50 text-violet-600'
+          }`}
+        >
+          <Sparkles size={13} />
+          Multi-Model Active
+        </div>
+      </div>
 
-                {/* User Avatar */}
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 p-0.5 shadow-md flex items-center justify-center cursor-pointer">
-                    <div className="w-full h-full rounded-[10px] bg-gray-900 flex items-center justify-center text-white font-bold text-xs">
-                        AI
-                    </div>
-                </div>
+      {/* Right */}
+      <div className="flex items-center gap-2">
+        <button type="button" title="Share chat" aria-label="Share chat" className={iconBtn}>
+          <Share2 size={17} />
+        </button>
 
-            </div>
-        </header>
-    );
+        <button
+          type="button"
+          onClick={toggleTheme}
+          title="Toggle theme"
+          aria-label="Toggle theme"
+          className={iconBtn}
+        >
+          {darkMode ? <Sun size={17} className="text-amber-400" /> : <Moon size={17} className="text-violet-600" />}
+        </button>
+
+        <button
+          type="button"
+          onClick={onOpenSettings}
+          title="Settings"
+          aria-label="Settings"
+          className={iconBtn}
+        >
+          <Settings size={17} />
+        </button>
+
+        <div className="ml-1 flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-indigo-500 text-xs font-bold text-white shadow-md shadow-violet-500/30 ring-2 ring-white/10 transition-transform hover:scale-105">
+          AI
+        </div>
+      </div>
+    </header>
+  );
 };
 
 export default ChatHeader;

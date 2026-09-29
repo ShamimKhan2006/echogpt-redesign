@@ -354,7 +354,7 @@ const Sidebar = ({
           locked,
           badge,
           // locked item e click korle upgrade page e jabe
-          target: locked ? '/upgrade' : item.href,
+          target: locked ? '/upgrade/videostudio'||'/upgrade/image-studio'  : item.href,
           active: !locked && isActivePath(pathname, item.href),
         };
       }),

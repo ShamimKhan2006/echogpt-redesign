@@ -25,9 +25,9 @@ export default function ChatPage() {
         <ChatHeader />
         <ChatWindow /> 
         <HistoryList/> 
-        <ModelSelector/> 
-        {/* <QuickActions/> 
-        <SettingsModal/> */}
+        {/* <ModelSelector/>  */}
+        {/* * <QuickActions/> 
+        <SettingsModal/>  */}
         {/* HistoryList, ModelSelector, QuickActions, SettingsModal */}
       </main>
     </div>
