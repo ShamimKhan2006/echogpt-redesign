@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useMemo } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import React, { useState, useEffect, useMemo } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Plus,
   Image as ImageIcon,
@@ -21,7 +21,7 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
   LayoutDashboard,
-} from 'lucide-react';
+} from "lucide-react";
 
 /* ---------------------------------------------------------------
    1. Nav items
@@ -30,79 +30,79 @@ import {
 ---------------------------------------------------------------- */
 const NAV_ITEMS = [
   {
-    id: 'dashboard',
-    label: 'Dashboard',
-    href: '/app',
+    id: "dashboard",
+    label: "Dashboard",
+    href: "/app",
     icon: LayoutDashboard,
-    color: 'text-violet-400',
+    color: "text-violet-400",
   },
   {
-    id: 'image',
-    label: 'Image Studio',
-    href: '/image-studio',
-    upgradeHref: '/upgrade/image-studio',
+    id: "image",
+    label: "Image Studio",
+    href: "/image-studio",
+    upgradeHref: "/upgrade/image-studio",
     icon: ImageIcon,
-    color: 'text-purple-400',
+    color: "text-purple-400",
     pro: true,
   },
   {
-    id: 'video',
-    label: 'Video Studio',
-    href: '/video-studio',
-    upgradeHref: '/upgrade/video-studio',
+    id: "video",
+    label: "Video Studio",
+    href: "/video-studio",
+    upgradeHref: "/upgrade/video-studio",
     icon: Video,
-    color: 'text-pink-400',
+    color: "text-pink-400",
     pro: true,
   },
   {
-    id: 'compare',
-    label: 'Compare',
-    href: '/compare',
+    id: "compare",
+    label: "Compare",
+    href: "/compare",
     icon: GitCompare,
-    color: 'text-indigo-400',
+    color: "text-indigo-400",
   },
   {
-    id: 'connectors',
-    label: 'Connectors',
-    href: '/connectors',
+    id: "connectors",
+    label: "Connectors",
+    href: "/connectors",
     icon: Network,
-    color: 'text-blue-400',
+    color: "text-blue-400",
   },
   {
-    id: 'history',
-    label: 'History',
-    href: '/history',
+    id: "history",
+    label: "History",
+    href: "/history",
     icon: History,
-    color: 'text-amber-400',
+    color: "text-amber-400",
   },
   {
-    id: 'store',
-    label: 'Store',
-    href: '/store',
+    id: "store",
+    label: "Store",
+    href: "/store",
     icon: Store,
-    color: 'text-emerald-400',
+    color: "text-emerald-400",
   },
   {
-    id: 'tasks',
-    label: 'AI Tasks',
-    href: '/tasks',
+    id: "tasks",
+    label: "AI Tasks",
+    href: "/tasks",
     icon: CheckSquare,
-    color: 'text-teal-400',
-    badgeKey: 'pendingTasks',
+    color: "text-teal-400",
+    badgeKey: "pendingTasks",
   },
   {
-    id: 'job',
-    label: 'AI Job Analysis',
-    href: '/job-analysis',
+    id: "job",
+    label: "AI Job Analysis",
+    href: "/job-analysis",
     icon: FileSearch,
-    color: 'text-orange-400',
+    color: "text-orange-400",
   },
   {
-    id: 'sop',
-    label: 'AI SOP Builder',
-    href: '/sop-builder',
+    id: "sop",
+    label: "AI SOP Builder",
+    href: "/sop-builder",
     icon: FileText,
-    color: 'text-cyan-400',
+    color: "text-cyan-400",
   },
 ];
 
@@ -110,7 +110,7 @@ const NAV_ITEMS = [
    2. Helpers
 ---------------------------------------------------------------- */
 const isActivePath = (pathname, href) =>
-  pathname === href || pathname.startsWith(href + '/');
+  pathname === href || pathname.startsWith(href + "/");
 
 /* ---------------------------------------------------------------
    3. Component
@@ -124,25 +124,27 @@ const isActivePath = (pathname, href) =>
 const Sidebar = ({
   darkMode,
   toggleTheme,
-  user = { name: 'Guest', plan: 'free' },
+  user = { name: "Guest", plan: "free" },
   counts = {},
   items = NAV_ITEMS,
   onNavigate,
 }) => {
-  const pathname = usePathname() || '';
-  const isPro = user?.plan === 'pro';
+  const pathname = usePathname() || "";
+  const isPro = user?.plan === "pro";
 
   // collapse state (localStorage e save thake, refresh korle-o thakbe)
   const [collapsed, setCollapsed] = useState(false);
   useEffect(() => {
     try {
-      setCollapsed(localStorage.getItem('sidebar:collapsed') === '1');
+      // This sync preserves the server-rendered default until browser storage is available.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setCollapsed(localStorage.getItem("sidebar:collapsed") === "1");
     } catch {}
   }, []);
   const toggleCollapsed = () => {
     setCollapsed((prev) => {
       try {
-        localStorage.setItem('sidebar:collapsed', prev ? '0' : '1');
+        localStorage.setItem("sidebar:collapsed", prev ? "0" : "1");
       } catch {}
       return !prev;
     });
@@ -156,40 +158,40 @@ const Sidebar = ({
         const count = item.badgeKey ? counts[item.badgeKey] : 0;
 
         let badge = null;
-        if (item.pro) badge = { text: 'PRO', tone: 'pro' };
+        if (item.pro) badge = { text: "PRO", tone: "pro" };
         else if (count > 0)
-          badge = { text: count > 99 ? '99+' : String(count), tone: 'count' };
+          badge = { text: count > 99 ? "99+" : String(count), tone: "count" };
 
         return {
           ...item,
           locked,
           badge,
           // locked hole nijer alada upgrade page e jabe
-          target: locked ? item.upgradeHref || '/upgrade' : item.href,
+          target: locked ? item.upgradeHref || "/upgrade" : item.href,
           active: !locked && isActivePath(pathname, item.href),
         };
       }),
-    [items, counts, isPro, pathname]
+    [items, counts, isPro, pathname],
   );
 
   const t = darkMode
     ? {
-        aside: 'bg-[#07070a] border-gray-800 text-white',
-        item: 'text-gray-300 hover:bg-gray-800/80 hover:text-white',
-        itemActive: 'bg-purple-500/15 text-white ring-1 ring-purple-500/30',
-        divider: 'border-gray-800/40',
+        aside: "bg-[#07070a] border-gray-800 text-white",
+        item: "text-gray-300 hover:bg-gray-800/80 hover:text-white",
+        itemActive: "bg-purple-500/15 text-white ring-1 ring-purple-500/30",
+        divider: "border-gray-800/40",
       }
     : {
-        aside: 'bg-[#fafafc] border-gray-200 text-gray-900',
-        item: 'text-gray-700 hover:bg-gray-100 hover:text-black',
-        itemActive: 'bg-purple-100 text-purple-900 ring-1 ring-purple-300',
-        divider: 'border-gray-200',
+        aside: "bg-[#fafafc] border-gray-200 text-gray-900",
+        item: "text-gray-700 hover:bg-gray-100 hover:text-black",
+        itemActive: "bg-purple-100 text-purple-900 ring-1 ring-purple-300",
+        divider: "border-gray-200",
       };
 
   return (
     <aside
       className={`${
-        collapsed ? 'w-[72px]' : 'w-64'
+        collapsed ? "w-[72px]" : "w-64"
       } h-screen border-r flex flex-col justify-between p-4 transition-all duration-300 select-none ${t.aside}`}
     >
       {/* Top */}
@@ -198,7 +200,7 @@ const Sidebar = ({
         <div className="space-y-4">
           <div
             className={`flex items-center ${
-              collapsed ? 'justify-center' : 'justify-between'
+              collapsed ? "justify-center" : "justify-between"
             } px-1`}
           >
             <Link href="/" className="flex items-center space-x-2.5">
@@ -261,13 +263,13 @@ const Sidebar = ({
                 key={item.id}
                 href={item.target}
                 onClick={onNavigate}
-                aria-current={item.active ? 'page' : undefined}
+                aria-current={item.active ? "page" : undefined}
                 title={collapsed ? item.label : undefined}
                 className={`w-full flex items-center ${
-                  collapsed ? 'justify-center' : 'justify-between'
+                  collapsed ? "justify-center" : "justify-between"
                 } px-3 py-2.5 rounded-xl text-xs font-medium transition-colors ${
                   item.active ? t.itemActive : t.item
-                } ${item.locked ? 'opacity-80' : ''}`}
+                } ${item.locked ? "opacity-80" : ""}`}
               >
                 <div className="flex items-center space-x-3">
                   <Icon className={`w-4 h-4 shrink-0 ${item.color}`} />
@@ -276,7 +278,7 @@ const Sidebar = ({
 
                 {!collapsed &&
                   item.badge &&
-                  (item.badge.tone === 'pro' ? (
+                  (item.badge.tone === "pro" ? (
                     // Pro user hole badge dekhabe na, free user hole lock + PRO
                     item.locked ? (
                       <span className="flex items-center gap-1 text-[9px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-bold border border-purple-500/30">
@@ -309,8 +311,8 @@ const Sidebar = ({
           <div
             className={`p-3.5 rounded-2xl border relative overflow-hidden ${
               darkMode
-                ? 'bg-gradient-to-br from-purple-950/50 to-indigo-950/30 border-purple-800/50'
-                : 'bg-purple-50 border-purple-200'
+                ? "bg-gradient-to-br from-purple-950/50 to-indigo-950/30 border-purple-800/50"
+                : "bg-purple-50 border-purple-200"
             }`}
           >
             <div className="flex items-center space-x-2 text-purple-400 mb-1.5">
@@ -319,10 +321,11 @@ const Sidebar = ({
             </div>
             <p
               className={`text-[11px] mb-3 leading-relaxed ${
-                darkMode ? 'text-gray-300' : 'text-gray-600'
+                darkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
-              Get Image Studio, Video Studio and performance statistics with Pro.
+              Get Image Studio, Video Studio and performance statistics with
+              Pro.
             </p>
             <Link
               href="/upgrade"
@@ -336,7 +339,7 @@ const Sidebar = ({
 
         <div
           className={`flex items-center ${
-            collapsed ? 'flex-col gap-3' : 'justify-between'
+            collapsed ? "flex-col gap-3" : "justify-between"
           } px-1`}
         >
           {/* <button
@@ -354,7 +357,7 @@ const Sidebar = ({
 
           {!collapsed && (
             <span className="text-[11px] text-gray-500 font-mono">
-              v2.0.4 {isPro ? 'Pro' : 'Free'}
+              v2.0.4 {isPro ? "Pro" : "Free"}
             </span>
           )}
         </div>

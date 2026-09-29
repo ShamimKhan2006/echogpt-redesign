@@ -66,7 +66,7 @@ const Navber = ({ darkMode = true, toggleTheme }) => {
                             href="/signup" 
                             className="flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-sm font-medium px-4 py-2 rounded-xl shadow-lg shadow-purple-600/25 transition-all transform active:scale-95"
                         >
-                            <span>Get Started</span>
+                            <span>Get Started </span>
                         </Link>
                     </div>
 

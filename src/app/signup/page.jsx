@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from "react";
@@ -66,7 +65,7 @@ const Page = () => {
 
     // Check existing email
     const userExists = existingUsers.some(
-      (user) => user.email.toLowerCase() === email.toLowerCase()
+      (user) => user.email.toLowerCase() === email.toLowerCase(),
     );
 
     if (userExists) {
@@ -86,7 +85,7 @@ const Page = () => {
     // Save user
     localStorage.setItem(
       "echogpt_users",
-      JSON.stringify([...existingUsers, newUser])
+      JSON.stringify([...existingUsers, newUser]),
     );
 
     // Save current user
@@ -103,9 +102,7 @@ const Page = () => {
   return (
     <main
       className={`min-h-screen transition-colors duration-300 ${
-        darkMode
-          ? "bg-[#08080d] text-white"
-          : "bg-[#f7f7fb] text-[#111118]"
+        darkMode ? "bg-[#08080d] text-white" : "bg-[#f7f7fb] text-[#111118]"
       }`}
     >
       {/* Background Glow */}
@@ -182,7 +179,6 @@ const Page = () => {
       {/* Main */}
       <section className="relative z-10 flex min-h-[calc(100vh-80px)] items-center justify-center px-5 py-10">
         <div className="w-full max-w-md">
-
           {/* Heading */}
           <div className="mb-7 text-center">
             <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-2xl font-bold text-white shadow-xl shadow-purple-500/20">
@@ -237,7 +233,6 @@ const Page = () => {
                   d="M12 6.13c1.44 0 2.73.49 3.75 1.46l2.81-2.81C16.85 3.19 14.64 2.25 12 2.25a9.77 9.77 0 0 0-8.75 5.39l3.26 2.52c.78-2.31 2.94-4.03 5.49-4.03Z"
                 />
               </svg>
-
               Continue with Google
             </button>
 
@@ -265,7 +260,6 @@ const Page = () => {
             </div>
 
             <form onSubmit={handleRegister}>
-
               {/* Full Name */}
               <div className="mb-4">
                 <label
@@ -378,9 +372,7 @@ const Page = () => {
 
                   <button
                     type="button"
-                    onClick={() =>
-                      setShowConfirmPassword(!showConfirmPassword)
-                    }
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     className={`absolute right-3 top-1/2 -translate-y-1/2 p-1 ${
                       darkMode
                         ? "text-gray-500 hover:text-gray-300"
@@ -409,7 +401,7 @@ const Page = () => {
                     darkMode ? "text-gray-400" : "text-gray-500"
                   }`}
                 >
-                  I agree to EchoGPT's{" "}
+                  I agree to EchoGPT&apos;s{" "}
                   <button
                     type="button"
                     className="font-medium text-purple-500 hover:text-purple-400"
@@ -481,4 +473,3 @@ const Page = () => {
 };
 
 export default Page;
-

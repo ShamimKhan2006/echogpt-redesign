@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -42,12 +41,11 @@ const Page = () => {
     }
 
     // Get registered users
-    const users =
-      JSON.parse(localStorage.getItem("echogpt_users")) || [];
+    const users = JSON.parse(localStorage.getItem("echogpt_users")) || [];
 
     // Find user
     const user = users.find(
-      (item) => item.email.toLowerCase() === email.toLowerCase()
+      (item) => item.email.toLowerCase() === email.toLowerCase(),
     );
 
     // User doesn't exist
@@ -63,10 +61,7 @@ const Page = () => {
     }
 
     // Login successful
-    localStorage.setItem(
-      "echogpt_current_user",
-      JSON.stringify(user)
-    );
+    localStorage.setItem("echogpt_current_user", JSON.stringify(user));
 
     setSuccess("Login successful! Redirecting...");
 
@@ -79,9 +74,7 @@ const Page = () => {
   return (
     <main
       className={`min-h-screen transition-colors duration-300 ${
-        darkMode
-          ? "bg-[#08080d] text-white"
-          : "bg-[#f7f7fb] text-[#111118]"
+        darkMode ? "bg-[#08080d] text-white" : "bg-[#f7f7fb] text-[#111118]"
       }`}
     >
       {/* Background Glow */}
@@ -159,7 +152,6 @@ const Page = () => {
       {/* Main */}
       <section className="relative z-10 flex min-h-[calc(100vh-80px)] items-center justify-center px-5 py-12">
         <div className="w-full max-w-md">
-
           {/* Heading */}
           <div className="mb-8 text-center">
             <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-2xl font-bold text-white shadow-xl shadow-purple-500/20">
@@ -217,7 +209,6 @@ const Page = () => {
                   d="M12 6.13c1.44 0 2.73.49 3.75 1.46l2.81-2.81C16.85 3.19 14.64 2.25 12 2.25a9.77 9.77 0 0 0-8.75 5.39l3.26 2.52c.78-2.31 2.94-4.03 5.49-4.03Z"
                 />
               </svg>
-
               Continue with Google
             </button>
 
@@ -245,7 +236,6 @@ const Page = () => {
             </div>
 
             <form onSubmit={handleLogin}>
-
               {/* Email */}
               <div className="mb-5">
                 <label
@@ -273,10 +263,7 @@ const Page = () => {
               {/* Password */}
               <div className="mb-2">
                 <div className="mb-2 flex items-center justify-between">
-                  <label
-                    htmlFor="password"
-                    className="text-sm font-medium"
-                  >
+                  <label htmlFor="password" className="text-sm font-medium">
                     Password
                   </label>
 
@@ -347,7 +334,7 @@ const Page = () => {
                 darkMode ? "text-gray-400" : "text-gray-500"
               }`}
             >
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link
                 href="/signup"
                 className="font-semibold text-purple-500 hover:text-purple-400"
@@ -363,7 +350,8 @@ const Page = () => {
               darkMode ? "text-gray-600" : "text-gray-400"
             }`}
           >
-            By continuing, you agree to EchoGPT's Terms & Privacy Policy.
+            By continuing, you agree to EchoGPT&apos;s Terms &amp; Privacy
+            Policy.
           </p>
         </div>
       </section>
@@ -372,4 +360,3 @@ const Page = () => {
 };
 
 export default Page;
-

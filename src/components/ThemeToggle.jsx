@@ -9,6 +9,8 @@ export default function ThemeToggle() {
 
   useEffect(() => {
     try {
+      // This sync preserves the server-rendered default until browser storage is available.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (localStorage.getItem("theme") === "dark") setTheme("dark");
     } catch {}
     setReady(true);
