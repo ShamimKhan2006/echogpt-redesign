@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { motion } from "motion/react";
 import Navber from "@/components/landing/Navber";
 import Hero from "@/components/landing/Hero";
 import Features from "@/components/landing/Features";
@@ -21,15 +22,12 @@ export default function Home() {
     try {
       const savedTheme = localStorage.getItem("theme");
       if (savedTheme === "light") {
-        // This sync preserves the server-rendered default until browser storage is available.
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setDarkMode(false);
         document.documentElement.classList.remove("dark");
       } else if (savedTheme === "dark") {
         setDarkMode(true);
         document.documentElement.classList.add("dark");
       } else {
-        // Default to dark mode if no saved preference
         setDarkMode(true);
         document.documentElement.classList.add("dark");
       }
@@ -52,8 +50,13 @@ export default function Home() {
   };
 
   return (
-    <main
-      className={`min-h-screen transition-colors duration-300 ${darkMode ? "bg-[#0b0b10] text-white" : "bg-white text-gray-900"}`}
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className={`min-h-screen transition-colors duration-300 selection:bg-purple-500/30 ${
+        darkMode ? "bg-[#0b0b10] text-white" : "bg-white text-gray-900"
+      }`}
     >
       <Navber darkMode={darkMode} toggleTheme={toggleTheme} />
       <Hero darkMode={darkMode} />
@@ -66,6 +69,6 @@ export default function Home() {
       <FAQ darkMode={darkMode} />
       <CTA darkMode={darkMode} />
       <Footer darkMode={darkMode} />
-    </main>
+    </motion.main>
   );
 }
