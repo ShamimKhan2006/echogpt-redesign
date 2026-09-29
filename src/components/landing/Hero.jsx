@@ -21,7 +21,7 @@ const Hero = ({ darkMode }) => {
 
                 {/* Main Heading */}
                 <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6">
-                    One AI Workspacee. <br />
+                    One AI Workspace... <br />
                     <span className="bg-gradient-to-r from-purple-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent">
                         Every Model.
                     </span>
